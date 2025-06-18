@@ -49,6 +49,22 @@ namespace Personal
 
         public double CalcularSalario()
         {
+            double adicional;
+            int antiguedad = ObtenerAntiguedad();
+            if (antiguedad < 20)
+            {
+                adicional = SueldoBasico * antiguedad / 100;
+            } else {
+                adicional = SueldoBasico * 0.25;
+            }
+            if (Cargo == Cargos.Ingeniero || Cargo == Cargos.Especialista)
+            {
+                adicional = adicional * 1.5;   
+            }
+            if (EstadoCivil.ToUpper() == "C")
+            {
+                adicional += 150000;
+            }
             
         }
     }
