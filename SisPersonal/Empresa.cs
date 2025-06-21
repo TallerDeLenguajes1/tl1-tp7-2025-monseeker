@@ -19,12 +19,22 @@ namespace Personal
         public double SueldoBasico { get; set; }
         public Cargos Cargo { get; set; }
 
+        public Empleado(string nombre, string apellido, DateTime fechaNacimiento, char estadoCivil, DateTime fechaIngreso, double sueldo, Cargos cargo){
+            Nombre = nombre;
+            Apellido = apellido;
+            FechaDeNacimiento = fechaNacimiento;
+            EstadoCivil = estadoCivil;
+            FechaIngresoEmpresa = fechaIngreso;
+            SueldoBasico = sueldo;
+            Cargo = cargo;
+        }
+
 
         public int ObtenerAntiguedad()
         {
             DateTime Hoy = DateTime.Today;
-            int antiguedad = FechaIngresoEmpresa.Year - Hoy.Year;
-            if ((Hoy.Month < FechaIngresoEmpresa.Month) || ((Hoy.Month == FechaIngresoEmpresa.Month) && (Hoy.Day < FechaIngresoEmpresa, Day)))
+            int antiguedad = Hoy.Year - FechaIngresoEmpresa.Year;
+            if ((Hoy.Month < FechaIngresoEmpresa.Month) || ((Hoy.Month == FechaIngresoEmpresa.Month) && (Hoy.Day < FechaIngresoEmpresa.Day)))
             {
                 antiguedad--;
             }
@@ -34,8 +44,8 @@ namespace Personal
         public int ObtenerEdad()
         {
             DateTime Hoy = DateTime.Today;
-            int edad = FechaDeNacimiento.Year - Hoy.Year;
-            if ((Hoy.Month < FechaDeNacimiento.Month) || ((Hoy.Month == FechaDeNacimiento.Month) && (Hoy.Day < FechaIngresoEmpresa, Day)))
+            int edad = Hoy.Year - FechaDeNacimiento.Year;
+            if ((Hoy.Month < FechaDeNacimiento.Month) || ((Hoy.Month == FechaDeNacimiento.Month) && (Hoy.Day < FechaDeNacimiento.Day)))
             {
                 edad--;
             }
@@ -61,11 +71,11 @@ namespace Personal
             {
                 adicional = adicional * 1.5;   
             }
-            if (EstadoCivil.ToUpper() == "C")
+            if (char.ToUpper(EstadoCivil) == 'C')
             {
                 adicional += 150000;
             }
-            
+            return SueldoBasico + adicional;
         }
     }
 }
